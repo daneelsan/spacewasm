@@ -1,0 +1,4 @@
+dev/
+zig-cache/
+zig-out/
+*.o
