@@ -1,8 +1,6 @@
 pub inline fn add(comptime T: type, a: T, b: T) T {
-    var result: T = undefined;
-    const carry_bit = @boolToInt(@addWithOverflow(T, a, b, &result));
-    result += carry_bit;
-    return result;
+    const ov = @addWithOverflow(a, b);
+    return ov[0] + ov[1];
 }
 
 pub inline fn sub(comptime T: type, a: T, b: T) T {

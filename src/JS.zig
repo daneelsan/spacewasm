@@ -36,8 +36,8 @@ pub const Screen = struct {
     }
 
     pub fn point(x: f32, y: f32) void {
-        const ix = @floatToInt(usize, x);
-        const iy = @floatToInt(usize, y);
+        const ix: usize = @intFromFloat(x);
+        const iy: usize = @intFromFloat(y);
         Imports.jsCanvas2DFillRect(ix, iy, 1, 1);
     }
 };

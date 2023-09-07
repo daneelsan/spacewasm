@@ -18,10 +18,10 @@ The game ends when any of the ships explode into pixel dust.
 
 ## Build
 
-To build the .wasm file, run:
+To build the .wasm file (and put it in the appropriate place), run:
 
 ```shell
-$ zig build -Drelease=true
+$ zig build && cp zig-out/lib/space.wasm docs/space.wasm
 
 $ ls docs/*.wasm
 docs/space.wasm
@@ -29,7 +29,7 @@ docs/space.wasm
 
 ```shell
 $ zig version
-0.9.1
+0.11.0
 ```
 
 ## TODO

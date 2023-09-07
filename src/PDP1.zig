@@ -81,7 +81,7 @@ const shift_count = blk: {
     @setEvalBranchQuota(8000);
     const map_len = 0o1000;
     var map: [map_len]u5 = undefined;
-    for (map) |*value, i| {
+    for (&map, 0..) |*value, i| {
         var mask = i;
         var count: u5 = 0;
         while (mask != 0) : (mask >>= 1) {
@@ -127,11 +127,11 @@ const Instruction = enum(u5) {
     }
 
     pub inline fn toInstruction(opcode: u5) Instruction {
-        return @intToEnum(Instruction, opcode);
+        return @as(Instruction, @enumFromInt(opcode));
     }
 
     pub inline fn y(word: u18) u12 {
-        return @truncate(u12, word);
+        return @truncate(word);
     }
 
     pub inline fn ib(word: u18) u1 {
@@ -616,7 +616,7 @@ fn execute(self: *PDP1) void {
 }
 
 inline fn getIR(word: u18) u5 {
-    return @truncate(u5, (word >> 13));
+    return @truncate((word >> 13));
 }
 
 fn ea(self: *PDP1) void {
@@ -632,12 +632,12 @@ fn ea(self: *PDP1) void {
 //-- I/O -----------------------------------------------------------------
 
 fn dpy(self: *PDP1) void {
-    const width = @intToFloat(f32, screen_width);
-    const height = @intToFloat(f32, screen_height);
+    const width: f32 = @floatFromInt(screen_width);
+    const height: f32 = @floatFromInt(screen_height);
 
     // (a + 0o400000) / 0o777777 puts `a` in the 0..1 range
-    const x_normal = @intToFloat(f32, self.ac +% 0o400000) / @as(f32, 0o777777);
-    const y_normal = @intToFloat(f32, self.io +% 0o400000) / @as(f32, 0o777777);
+    const x_normal = @as(f32, @floatFromInt(self.ac +% 0o400000)) / @as(f32, 0o777777);
+    const y_normal = @as(f32, @floatFromInt(self.io +% 0o400000)) / @as(f32, 0o777777);
 
     const x = x_normal * width;
     const y = y_normal * height;
@@ -703,5 +703,5 @@ inline fn bitTest(word: u18, b: u5) bool {
 
 inline fn bitGet(word: u18, b: u5) u1 {
     std.debug.assert(b <= 17);
-    return @truncate(u1, (word >> b) & 1);
+    return @truncate((word >> b) & 1);
 }
