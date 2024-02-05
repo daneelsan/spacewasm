@@ -8,6 +8,6 @@ pub inline fn sub(comptime T: type, a: T, b: T) T {
 }
 
 pub inline fn sign(comptime T: type, x: T) T {
-    comptime var sign_shift = @typeInfo(T).Int.bits - 1;
+    const sign_shift = @typeInfo(T).Int.bits - 1;
     return (x >> sign_shift);
 }

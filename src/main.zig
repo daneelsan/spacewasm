@@ -11,7 +11,7 @@ export const screen_width: usize = PDP1.screen_width;
 export const screen_height: usize = PDP1.screen_height;
 
 export fn init() void {
-    std.mem.copy(u18, pdp1.mem[0..], Spacewar.memory[0..]); // TODO: make this a method
+    std.mem.copyForwards(u18, pdp1.mem[0..], Spacewar.memory[0..]); // TODO: make this a method
     pdp1.pc = 4;
     pdp1.run = true;
 }
