@@ -1,4 +1,4 @@
-dev/
-zig-cache/
+.dev/
+.zig-cache/
 zig-out/
 *.o
