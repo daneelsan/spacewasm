@@ -29,7 +29,7 @@ docs/space.wasm
 
 ```shell
 $ zig version
-0.14.0-dev.1588+2111f4c38
+0.14.0
 ```
 
 ## TODO
